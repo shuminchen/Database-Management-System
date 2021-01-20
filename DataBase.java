@@ -17,7 +17,6 @@ import java.util.*;
 public class DataBase{
 	public int blocksize = 20000;
 	public String path;
-//	public HashMap<Character, ArrayList<Integer>> queryFirstLine = new HashMap<Character,ArrayList<Integer>>();// a list of R.a to sum up
 	public HashMap<String, String> joinPairs;
 	public ArrayList<String> queryFirstLine ; // eg: A12, B2...
 	public Character [] querySecondLine;   // an array of the name of relation tables that will need to be joint
@@ -31,7 +30,6 @@ public class DataBase{
 
 	//the hashmap below store info of meta Data, String--> table name, could be A, or AB  ;    value: info of the table including rowNum, colNum, columInfo
 	public HashMap<String, Table> databaseMetaData  = new HashMap<String, Table>();
-//	public HashMap<String, Column[]> tableColumnInfo = new HashMap<String, Column[]>();
 	// key: table name; value: an array of column object storing its column info (max, min, and UniqueValueNum)
 
 	public HashMap<String, Boolean> onDisk = new HashMap<String, Boolean>();
@@ -68,7 +66,7 @@ public class DataBase{
 	
 	
 	/**
-	 * This method execute the query and load the database
+	 * This method executes the query and load the database
 	 * @param query
 	 * @param path  path eg: data/xxxs/A.csv,data/xxxs/B.csv,data/xxxs/C.csv
 	 * @throws IOException 
@@ -135,7 +133,6 @@ public class DataBase{
 		BufferedReader br = new BufferedReader(new FileReader(this.path+tablename+".csv"));// check if this need to add ".csv"
 		String line = br.readLine();
 		int columnNum =line.split(",").length;
-	//	ArrayList<int[]> coluInfo = new ArrayList<int[]>();
 		br.close();
 			
 		FileReader fr = new FileReader(this.path+tablename+".csv");
@@ -164,7 +161,6 @@ public class DataBase{
 					columnCursor++;
 					lastNumberStart = i+1;
 					// if numRead > columnMax
-					
 					
 					if(numRead>this.databaseMetaData.get(tablename).columnInfo.get(tablename+Integer.toString(columnCursor))[0]) {
 						this.databaseMetaData.get(tablename).columnInfo.get(tablename+Integer.toString(columnCursor))[0]=numRead;
@@ -417,7 +413,6 @@ public class DataBase{
 		ArrayList<int[]> table2Buffer = new ArrayList<>();
 		
 		
-	//	while(t1Loader.hasNext()) {
 			//read a block of row in table1
 			ArrayList<int[]> t1block = t1Loader.getNext();
 			t1Loader.close();
@@ -580,7 +575,6 @@ public class DataBase{
 		
 		DataOutputStream toDisk = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(combinedTable.tablename+".dat")));
 		HashMap<Integer, ArrayList<int[]>> table1buffer = new HashMap<Integer, ArrayList<int[]>>();
-//		ArrayList<int[]> table2Buffer = new ArrayList<>();
 		while(t1Loader.hasNext()) {
 			//read a block of row in table1
 			ArrayList<int[]> t1block = t1Loader.getNext();
@@ -799,11 +793,7 @@ public class DataBase{
 		ArrayList<int[]> newColuIndex = new ArrayList<int[]>(); 
 		
 ;
-		//store table1's neededColumn in t1t2NeededColumn and store with new Index
-	//	for(int i=0;i<t1NeededColumn.size();i++) {
-	//		t1t2NeededColumn.add(e)
-		//	original.. as String --->i
-	//	}
+		
 		
 	
 		
